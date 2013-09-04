@@ -39,10 +39,6 @@ public interface RndGroupDao {
 
     Set<RndGroup> findHierarchicalGroupAsNative(RndPrincipal principal);
 
-    List<String> findHierarchicalGroupRoleAsNative(RndPrincipal principal);
-
-    Set<RndGroup> findHierarchicalGroupAsView(RndPrincipal principal);
-
     RndGroupMember findGroupMember(RndGroup group, RndPrincipal principal);
 
     Integer count();

@@ -19,7 +19,8 @@ public class RndPrincipalImpl implements RndPrincipal {
 
     @Id
     @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(allocationSize=1, initialValue=1, sequenceName="SEQ_RND_PRINCIPAL", name="SEQ_RND_PRINCIPAL")
+    @GeneratedValue(generator="SEQ_RND_PRINCIPAL", strategy=GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "NAME")

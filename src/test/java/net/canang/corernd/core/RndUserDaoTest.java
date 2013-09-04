@@ -66,9 +66,9 @@ public class RndUserDaoTest extends AbstractTransactionalJUnit4SpringContextTest
             RndGroup group = groupDao.findByName("GroupLevel2");
             groupDao.addMember(group, root, root);
         } catch (RecursiveGroupException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         } catch (LockedGroupException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
     }
 
@@ -121,5 +121,4 @@ public class RndUserDaoTest extends AbstractTransactionalJUnit4SpringContextTest
         RndUser saved = userDao.findByUsername("newuser");
         Assert.assertNotNull(saved);
     }
-
 }

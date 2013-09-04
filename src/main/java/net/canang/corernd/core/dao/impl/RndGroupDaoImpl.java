@@ -2,8 +2,8 @@ package net.canang.corernd.core.dao.impl;
 
 import net.canang.corernd.core.LockedGroupException;
 import net.canang.corernd.core.RecursiveGroupException;
-import net.canang.corernd.core.dao.RndGroupDao;
 import net.canang.corernd.core.dao.DaoSupport;
+import net.canang.corernd.core.dao.RndGroupDao;
 import net.canang.corernd.core.model.*;
 import net.canang.corernd.core.model.impl.RndGroupImpl;
 import net.canang.corernd.core.model.impl.RndGroupMemberImpl;
@@ -13,7 +13,6 @@ import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.type.LongType;
-import org.hibernate.type.StringType;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
@@ -180,31 +179,6 @@ public class RndGroupDaoImpl extends DaoSupport<Long, RndGroup, RndGroupImpl> im
             groups.add(findById(result));
         }
         return groups;
-    }
-
-    @Override
-    public List<String> findHierarchicalGroupRoleAsNative(RndPrincipal principal) {
-        Session session = sessionFactory.getCurrentSession();
-        String sqlQuery = "SELECT /*+ USE_HASH(U,M,G) ORDERED IGNORE_OPTIM_EMBEDDED_HINTS */ 'X' \n" +
-                "FROM fs_principal p, " +
-                "fs_group g, " +
-                "fs_group_member m, " +
-                "fs_principal u " +
-                "WHERE p.id = g.id " +
-                "AND m.group_id = g.id " +
-                "AND m.principal_id = u.id " +
-                "and u.name = '" + principal.getName() + "' " +
-                "AND CONNECT_BY_ROOT p.id = FS_GROUP_ROLE.group_id \n" +
-                "connect by prior m.principal_id = m.group_id";
-        sqlQuery = "select role from fs_group_role where exists ( " + sqlQuery + " )";
-        SQLQuery query = session.createSQLQuery(sqlQuery);
-        query.addScalar("role", StringType.INSTANCE);
-        return (List<String>) query.list();
-    }
-
-    @Override
-    public Set<RndGroup> findHierarchicalGroupAsView(RndPrincipal principal) {
-        throw new UnsupportedOperationException();
     }
 
     @Override

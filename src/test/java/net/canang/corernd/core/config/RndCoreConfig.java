@@ -49,12 +49,11 @@ public class RndCoreConfig {
     @Bean
     public Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         properties.put("hibernate.show_sql", "false");
         properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.format_sql", "true");
         properties.put("javax.persistence.validation.mode", "none");
-        properties.put("hibernate.connection.zeroDateTimeBehavior", "convertToNull");
 
         //properties.put("hibernate.connection.pool_size", "1");
         //properties.put("hibernate.format_sql", "true");
@@ -75,11 +74,11 @@ public class RndCoreConfig {
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setUsername("corernd");
-        dataSource.setPassword("corernd");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/corernd?zeroDateTimeBehavior=convertToNull");
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setInitialSize(10);
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("postgres");
+        dataSource.setUrl("jdbc:postgresql://localhost:8000/postgres");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setInitialSize(2);
         dataSource.setMaxActive(5);
         dataSource.setMaxWait(5000);
         return dataSource;
