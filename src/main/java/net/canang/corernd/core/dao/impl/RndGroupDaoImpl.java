@@ -163,7 +163,7 @@ public class RndGroupDaoImpl extends DaoSupport<Long, RndGroup, RndGroupImpl> im
     @Override
     public Set<RndGroup> findHierarchicalGroupAsNative(RndPrincipal principal) {
         Session session = sessionFactory.getCurrentSession();
-        String sqlQuery = "SELECT /*+ USE_NL(U) IGNORE_OPTIM_EMBEDDED_HINTS */ CONNECT_BY_ROOT p.id parent " +
+        String sqlQuery = "SELECT CONNECT_BY_ROOT p.id parent " +
                 "FROM fs_principal p, fs_group g, fs_group_member m, fs_principal u " +
                 "WHERE p.id = g.id " +
                 "AND m.group_id = g.id " +

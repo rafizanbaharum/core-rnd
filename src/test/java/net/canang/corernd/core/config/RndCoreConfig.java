@@ -74,9 +74,9 @@ public class RndCoreConfig {
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres");
-        dataSource.setUrl("jdbc:postgresql://localhost:8000/postgres");
+        dataSource.setUsername("corernd");
+        dataSource.setPassword("corernd");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/corernd");
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setInitialSize(2);
         dataSource.setMaxActive(5);
